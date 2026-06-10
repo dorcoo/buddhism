@@ -596,6 +596,229 @@
             align-items: center;
             justify-content: center;
         }
+
+        /* Search trigger button in header */
+        .search-trigger-btn {
+            background: transparent;
+            border: 1px solid var(--line);
+            color: var(--sub);
+            border-radius: 8px;
+            padding: 6px 12px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-size: 0.88rem;
+            transition: all 0.2s ease;
+            margin-left: 8px;
+        }
+
+        .search-trigger-btn:hover {
+            background: var(--sage-soft);
+            color: var(--text);
+            border-color: var(--line-strong);
+        }
+
+        .search-trigger-btn svg {
+            opacity: 0.8;
+        }
+
+        /* Search Modal Styles */
+        #searchModalOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(11, 13, 10, 0.75);
+            backdrop-filter: blur(20px);
+            opacity: 0;
+            visibility: hidden;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 80px 20px 40px;
+            transition: all 0.3s ease;
+        }
+
+        #searchModalOverlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .search-modal-content {
+            background: rgba(23, 26, 20, 0.96);
+            border: 1px solid var(--line-strong);
+            border-radius: 12px;
+            width: min(840px, 100%);
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 24px 54px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+        }
+
+        #searchModalOverlay.active .search-modal-content {
+            transform: translateY(0);
+        }
+
+        .search-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .search-input-wrapper {
+            flex-grow: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input-wrapper svg {
+            position: absolute;
+            left: 14px;
+            color: var(--muted);
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(8, 10, 7, 0.5);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 12px 16px 12px 42px;
+            font-size: 1.05rem;
+            color: var(--text);
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--gold);
+        }
+
+        .search-close-btn {
+            background: transparent;
+            border: none;
+            color: var(--muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 4px;
+            line-height: 1;
+            transition: color 0.2s ease;
+        }
+
+        .search-close-btn:hover {
+            color: var(--text);
+        }
+
+        .search-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .search-stats {
+            font-size: 0.88rem;
+            color: var(--muted);
+            margin-bottom: 16px;
+        }
+
+        .search-section-title {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.1rem;
+            color: var(--gold);
+            margin-bottom: 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid rgba(218, 205, 171, 0.15);
+        }
+
+        .search-quotes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+            gap: 12px;
+        }
+
+        .search-quote-card {
+            background: rgba(242, 236, 220, 0.03);
+            border: 1px solid rgba(218, 205, 171, 0.08);
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .search-quote-card:hover {
+            background: var(--sage-soft);
+            border-color: var(--line-strong);
+            transform: translateY(-2px);
+        }
+
+        .search-quote-text {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 0.94rem;
+            color: var(--text);
+            margin-bottom: 8px;
+            line-height: 1.6;
+            word-break: keep-all;
+        }
+
+        .search-quote-source {
+            font-size: 0.84rem;
+            color: var(--gold);
+            display: block;
+        }
+
+        .search-study-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .search-study-card {
+            background: rgba(242, 236, 220, 0.03);
+            border: 1px solid rgba(218, 205, 171, 0.08);
+            border-radius: 8px;
+            padding: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+
+        .search-study-card:hover {
+            background: var(--sage-soft);
+            border-color: var(--line-strong);
+            transform: translateY(-2px);
+        }
+
+        .search-study-card h4 {
+            font-family: 'Noto Serif KR', serif;
+            font-size: 1.02rem;
+            color: var(--text);
+            margin-bottom: 6px;
+        }
+
+        .search-study-snippet {
+            font-size: 0.88rem;
+            color: var(--sub);
+            line-height: 1.5;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--muted);
+        }
+
+        mark {
+            background: rgba(215, 200, 153, 0.35);
+            color: var(--text);
+            border-radius: 2px;
+            padding: 0 2px;
+        }
     </style>
 </head>
 <body>
@@ -609,6 +832,10 @@
                 <a href="index.html" aria-current="page">오늘의 말씀</a>
                 <a href="study.html">불교 철학 공부</a>
                 <a href="discussion.html">토론</a>
+                <button type="button" class="search-trigger-btn" onclick="openSearchModal()" aria-label="검색 열기">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <span>검색</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -678,11 +905,29 @@
         </div>
     </div>
 
+    <!-- Unified Search Modal -->
+    <div id="searchModalOverlay" onclick="closeSearchModal()">
+        <div class="search-modal-content" onclick="event.stopPropagation()">
+            <div class="search-header">
+                <div class="search-input-wrapper">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" class="search-input" id="searchInput" placeholder="찾고 싶은 말씀이나 키워드를 입력하세요 (예: 자비, 연기, 마음)" oninput="performSearch()">
+                </div>
+                <button type="button" class="search-close-btn" onclick="closeSearchModal()">&times;</button>
+            </div>
+            <div class="search-body">
+                <div class="search-stats" id="searchStats">검색어를 입력해주세요.</div>
+                <div id="searchResults"></div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <div class="container">마음의 평화를 찾는 여정</div>
     </footer>
 
     <script src="quotes.js"></script>
+    <script src="studyData.js"></script>
     <script>
         const authorDb = {
             "서산 대사": {
@@ -1018,7 +1263,159 @@
             });
         }
 
-        window.addEventListener('DOMContentLoaded', rollHwadu);
+        // Search Modal Controller Functions
+        function openSearchModal() {
+            const overlay = document.getElementById('searchModalOverlay');
+            overlay.classList.add('active');
+            const input = document.getElementById('searchInput');
+            input.value = '';
+            input.focus();
+            document.getElementById('searchResults').innerHTML = '';
+            document.getElementById('searchStats').textContent = '검색어를 입력해주세요.';
+        }
+
+        function closeSearchModal() {
+            const overlay = document.getElementById('searchModalOverlay');
+            overlay.classList.remove('active');
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const resultsContainer = document.getElementById('searchResults');
+            const statsEl = document.getElementById('searchStats');
+            
+            if (!query) {
+                resultsContainer.innerHTML = '';
+                statsEl.textContent = '검색어를 입력해주세요.';
+                return;
+            }
+
+            let quoteResults = [];
+            let studyResults = [];
+
+            // 1. Search in hwaduList
+            if (typeof hwaduList !== 'undefined') {
+                hwaduList.forEach((quote, idx) => {
+                    if (quote.text.toLowerCase().includes(query) || 
+                        quote.source.toLowerCase().includes(query) || 
+                        quote.insight.toLowerCase().includes(query)) {
+                        quoteResults.push({ index: idx, quote: quote });
+                    }
+                });
+            }
+
+            // 2. Search in studyData
+            if (typeof studyData !== 'undefined') {
+                Object.keys(studyData).forEach(key => {
+                    const ch = studyData[key];
+                    if (ch.title.toLowerCase().includes(query) || ch.content.toLowerCase().includes(query)) {
+                        let snippet = '';
+                        const idx = ch.content.toLowerCase().indexOf(query);
+                        if (idx !== -1) {
+                            const start = Math.max(0, idx - 40);
+                            const end = Math.min(ch.content.length, idx + query.length + 60);
+                            snippet = '...' + ch.content.substring(start, end).replace(/\n/g, ' ') + '...';
+                        } else {
+                            snippet = ch.content.substring(0, 100).replace(/\n/g, ' ') + '...';
+                        }
+                        studyResults.push({ id: key, title: ch.title, snippet: snippet });
+                    }
+                });
+            }
+
+            const totalCount = quoteResults.length + studyResults.length;
+            statsEl.textContent = `"${query}" 검색 결과: 총 ${totalCount}개 찾음`;
+
+            if (totalCount === 0) {
+                resultsContainer.innerHTML = `<div class="no-results">검색 결과가 없습니다. 다른 검색어를 입력해보세요.</div>`;
+                return;
+            }
+
+            let html = '';
+
+            // Render Quotes
+            if (quoteResults.length > 0) {
+                html += `<div class="search-section-title">오늘의 말씀 (${quoteResults.length}개)</div>`;
+                html += `<div class="search-quotes-grid">`;
+                quoteResults.forEach(item => {
+                    const highlightedText = highlightText(item.quote.text, query);
+                    const highlightedSource = highlightText(item.quote.source, query);
+                    
+                    html += `
+                        <div class="search-quote-card" onclick="selectQuoteFromSearch(${item.index})" role="button" tabindex="0">
+                            <p class="search-quote-text">${highlightedText}</p>
+                            <span class="search-quote-source">- ${highlightedSource}</span>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+
+            // Render Study Materials
+            if (studyResults.length > 0) {
+                html += `<div class="search-section-title" style="margin-top: 24px;">학습 교재 (${studyResults.length}개)</div>`;
+                html += `<div class="search-study-list">`;
+                studyResults.forEach(item => {
+                    const highlightedSnippet = highlightText(item.snippet, query);
+                    html += `
+                        <div class="search-study-card" onclick="location.href='study.html?chapter=${item.id}#materials'" role="button" tabindex="0">
+                            <h4>${item.title}</h4>
+                            <p class="search-study-snippet">${highlightedSnippet}</p>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+            }
+
+            resultsContainer.innerHTML = html;
+        }
+
+        function highlightText(text, query) {
+            if (!query) return text;
+            const regex = new RegExp(`(${escapeRegExp(query)})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>');
+        }
+
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        }
+
+        function selectQuoteFromSearch(index) {
+            currentHwaduIndex = index;
+            const chosen = hwaduList[index];
+            
+            const textEl = document.getElementById('hwaduText');
+            const sourceEl = document.getElementById('hwaduSource');
+            const insightEl = document.getElementById('hwaduInsight');
+            
+            textEl.innerHTML = chosen.text;
+            sourceEl.innerHTML = `
+                <span class="source-text">${chosen.source}</span>
+                <div class="author-tooltip" id="authorTooltip" aria-hidden="true">
+                    <div class="author-tooltip-name" id="tooltipName">인물 이름</div>
+                    <div class="author-tooltip-desc" id="tooltipDesc">설명</div>
+                </div>
+            `;
+            updateAuthorTooltip(chosen.source);
+            insightEl.textContent = chosen.insight;
+            document.getElementById('reflectionInput').value = storageGet(`reflection_${currentHwaduIndex}`) || '';
+            
+            closeSearchModal();
+        }
+
+        // Initialize and check URL parameters on DOMContentLoaded
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const quoteParam = urlParams.get('quote');
+            if (quoteParam !== null && !isNaN(quoteParam)) {
+                const idx = parseInt(quoteParam, 10);
+                if (idx >= 0 && idx < hwaduList.length) {
+                    selectQuoteFromSearch(idx);
+                    return;
+                }
+            }
+            rollHwadu();
+        });
     </script>
 </body>
 </html>
