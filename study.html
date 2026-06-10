@@ -344,6 +344,126 @@
             margin-top: 20px;
         }
 
+        /* Study Library styles */
+        .chapter-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--line);
+            padding-bottom: 16px;
+        }
+
+        .chapter-btn {
+            background: rgba(8, 10, 7, 0.3);
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            color: var(--sub);
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chapter-btn:hover {
+            background: var(--sage-soft);
+            color: var(--text);
+            border-color: var(--line-strong);
+        }
+
+        .chapter-btn.active {
+            background: var(--gold);
+            color: #171a14;
+            border-color: var(--gold);
+            font-weight: 700;
+        }
+
+        .reader-container {
+            background: rgba(8, 10, 7, 0.4);
+            border: 1px solid rgba(218, 205, 171, 0.1);
+            border-radius: 8px;
+            padding: clamp(20px, 4vw, 36px);
+            margin-top: 16px;
+        }
+
+        /* Markdown rendering typography */
+        .markdown-body h1 {
+            font-size: 1.6rem;
+            color: var(--gold);
+            margin-bottom: 24px;
+            border-bottom: 1px solid rgba(218, 205, 171, 0.15);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .markdown-body h2 {
+            font-size: 1.32rem;
+            color: var(--sage);
+            margin-top: 32px;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(157, 172, 146, 0.15);
+            padding-bottom: 6px;
+        }
+
+        .markdown-body h3 {
+            font-size: 1.12rem;
+            color: var(--text);
+            margin-top: 24px;
+            margin-bottom: 10px;
+        }
+
+        .markdown-body p {
+            font-size: 0.98rem;
+            color: var(--sub);
+            line-height: 1.85;
+            margin-bottom: 16px;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+
+        .markdown-body ul, 
+        .markdown-body ol {
+            margin-bottom: 20px;
+            padding-left: 24px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .markdown-body li {
+            color: var(--sub);
+            font-size: 0.96rem;
+            line-height: 1.75;
+        }
+
+        .markdown-body blockquote {
+            border-left: 4px solid var(--gold);
+            background: rgba(215, 200, 153, 0.05);
+            padding: 14px 20px;
+            margin: 24px 0;
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+        }
+
+        .markdown-body blockquote p {
+            margin-bottom: 0;
+            color: var(--text);
+        }
+
+        .markdown-body hr {
+            border: 0;
+            border-top: 1px solid rgba(218, 205, 171, 0.15);
+            margin: 32px 0;
+        }
+
+        .markdown-body code {
+            background: var(--sage-soft);
+            color: var(--text);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.88rem;
+        }
+
         footer {
             border-top: 1px solid var(--line);
             padding: 38px 0;
@@ -420,6 +540,7 @@
 
         <nav class="toc" aria-label="단계 목차">
             <a href="#basics"><strong>기본 지도</strong><span>불교 공부의 뼈대를 봅니다.</span></a>
+            <a href="#materials"><strong>학습 도서관</strong><span>7개 핵심 교재를 정독합니다.</span></a>
             <a href="#stage1"><strong>1단계 입문</strong><span>고통의 구조를 이해합니다.</span></a>
             <a href="#stage2"><strong>2단계 심화</strong><span>나와 세계의 관계를 봅니다.</span></a>
             <a href="#stage3"><strong>3단계 수행</strong><span>몸과 마음으로 체화합니다.</span></a>
@@ -471,6 +592,35 @@
                         <li>몸 감각과 호흡을 3분 관찰합니다.</li>
                         <li>내일 바꿀 수 있는 말이나 행동 하나를 정합니다.</li>
                     </ol>
+                </div>
+            </div>
+        </section>
+
+        <!-- 교재 학습 센터 Section -->
+        <section class="stage" id="materials" style="margin-bottom: 34px;">
+            <div class="stage-head">
+                <div>
+                    <span class="stage-number">Study Library</span>
+                    <h2>체계적인 학습 교재 읽기</h2>
+                    <p class="stage-summary">주제별 가이드북과 교학, 용어사전, 경전 안내를 선택하여 읽어봅니다.</p>
+                </div>
+            </div>
+
+            <!-- Chapter Selection Tabs -->
+            <div class="chapter-nav" role="tablist" aria-label="교재 목차">
+                <button type="button" class="chapter-btn active" data-chapter="00" role="tab" aria-selected="true" onclick="selectChapter('00')">00. 학습 로드맵</button>
+                <button type="button" class="chapter-btn" data-chapter="01" role="tab" aria-selected="false" onclick="selectChapter('01')">01. 기초 입문</button>
+                <button type="button" class="chapter-btn" data-chapter="02" role="tab" aria-selected="false" onclick="selectChapter('02')">02. 중급 교학</button>
+                <button type="button" class="chapter-btn" data-chapter="03" role="tab" aria-selected="false" onclick="selectChapter('03')">03. 대승 철학</button>
+                <button type="button" class="chapter-btn" data-chapter="04" role="tab" aria-selected="false" onclick="selectChapter('04')">04. 실천 가이드</button>
+                <button type="button" class="chapter-btn" data-chapter="05" role="tab" aria-selected="false" onclick="selectChapter('05')">05. 용어 사전</button>
+                <button type="button" class="chapter-btn" data-chapter="06" role="tab" aria-selected="false" onclick="selectChapter('06')">06. 경전 안내</button>
+            </div>
+
+            <!-- Reader Box -->
+            <div class="reader-container">
+                <div class="reader-content markdown-body" id="readerContent">
+                    <!-- Markdown content will render here -->
                 </div>
             </div>
         </section>
@@ -711,6 +861,8 @@
         <div class="container">오늘의 말씀과 불교 철학 공부</div>
     </footer>
 
+    <script src="studyData.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         function storageGet(key) {
             try {
@@ -743,6 +895,32 @@
                 setStageState(button, next);
                 storageSet(key, next);
             });
+        });
+
+        function selectChapter(chapterId) {
+            const contentEl = document.getElementById('readerContent');
+            if (!contentEl || typeof studyData === 'undefined' || !studyData[chapterId]) return;
+
+            // Update active status for buttons
+            document.querySelectorAll('.chapter-btn').forEach(btn => {
+                const isActive = btn.dataset.chapter === chapterId;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            });
+
+            const chapter = studyData[chapterId];
+            
+            // Parse using Marked
+            if (window.marked && window.marked.parse) {
+                contentEl.innerHTML = window.marked.parse(chapter.content);
+            } else {
+                contentEl.innerText = chapter.content;
+            }
+        }
+
+        // Initialize with chapter 00 on load
+        window.addEventListener('DOMContentLoaded', () => {
+            selectChapter('00');
         });
     </script>
 </body>
