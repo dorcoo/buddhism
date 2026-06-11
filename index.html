@@ -856,6 +856,7 @@
             <nav class="nav-links" aria-label="주요 페이지">
                 <a href="index.html" aria-current="page">오늘의 말씀</a>
                 <a href="study.html">불교 철학 공부</a>
+                <a href="library.html">학습 도서관</a>
                 <a href="discussion.html">토론</a>
                 <button type="button" class="search-trigger-btn" onclick="openSearchModal()" aria-label="검색 열기">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -951,8 +952,8 @@
         <div class="container">마음의 평화를 찾는 여정</div>
     </footer>
 
-    <script src="quotes.js?v=20260611b"></script>
-    <script src="studyData.js?v=20260611b"></script>
+    <script src="quotes.js?v=20260611c"></script>
+    <script src="studyData.js?v=20260611c"></script>
     <script>
         const authorDb = {
             "서산 대사": {
@@ -1383,7 +1384,7 @@
                 studyResults.forEach(item => {
                     const highlightedSnippet = highlightText(item.snippet, query);
                     html += `
-                        <div class="search-study-card" onclick="location.href='study.html?chapter=${item.id}#materials'" role="button" tabindex="0">
+                        <div class="search-study-card" onclick="location.href='library.html?chapter=${item.id}'" role="button" tabindex="0">
                             <h4>${item.title}</h4>
                             <p class="search-study-snippet">${highlightedSnippet}</p>
                         </div>

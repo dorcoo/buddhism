@@ -1076,6 +1076,7 @@
             <nav class="nav-links" aria-label="주요 페이지">
                 <a href="index.html">오늘의 말씀</a>
                 <a href="study.html" aria-current="page">불교 철학 공부</a>
+                <a href="library.html">학습 도서관</a>
                 <a href="discussion.html">토론</a>
                 <button type="button" class="search-trigger-btn" onclick="openSearchModal()" aria-label="검색 열기">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -1094,11 +1095,11 @@
 
         <nav class="toc" aria-label="단계 목차">
             <a href="#basics"><strong>기본 지도</strong><span>불교 공부의 뼈대를 봅니다.</span></a>
-            <a href="#materials"><strong>학습 도서관</strong><span>7개 핵심 교재를 정독합니다.</span></a>
             <a href="#stage1"><strong>1단계 입문</strong><span>고통의 구조를 이해합니다.</span></a>
             <a href="#stage2"><strong>2단계 심화</strong><span>나와 세계의 관계를 봅니다.</span></a>
             <a href="#stage3"><strong>3단계 수행</strong><span>몸과 마음으로 체화합니다.</span></a>
             <a href="#stage4"><strong>4단계 일상화</strong><span>관계와 삶 속에 적용합니다.</span></a>
+            <a href="library.html"><strong>학습 도서관</strong><span>교재와 사전은 별도 페이지에서 읽습니다.</span></a>
         </nav>
 
         <section class="note basics" id="basics">
@@ -1146,44 +1147,6 @@
                         <li>몸 감각과 호흡을 3분 관찰합니다.</li>
                         <li>내일 바꿀 수 있는 말이나 행동 하나를 정합니다.</li>
                     </ol>
-                </div>
-            </div>
-        </section>
-
-        <!-- 교재 학습 센터 Section -->
-        <section class="stage" id="materials" style="margin-bottom: 34px;">
-            <div class="stage-head">
-                <div>
-                    <span class="stage-number">Study Library</span>
-                    <h2>체계적인 학습 교재 읽기</h2>
-                    <p class="stage-summary">주제별 가이드북과 교학, 용어사전, 경전 안내를 선택하여 읽어봅니다.</p>
-                </div>
-            </div>
-
-            <!-- Chapter Selection Tabs -->
-            <div class="chapter-nav" role="tablist" aria-label="교재 목차">
-                <div class="chapter-group">
-                    <div class="chapter-group-label">길잡이</div>
-                    <button type="button" class="chapter-btn active" data-chapter="00" role="tab" aria-selected="true" onclick="selectChapter('00')">00. 전체 로드맵</button>
-                </div>
-                <div class="chapter-group">
-                    <div class="chapter-group-label">핵심 과정</div>
-                    <button type="button" class="chapter-btn" data-chapter="01" role="tab" aria-selected="false" onclick="selectChapter('01')">01. 초기 불교와 괴로움의 구조</button>
-                    <button type="button" class="chapter-btn" data-chapter="02" role="tab" aria-selected="false" onclick="selectChapter('02')">02. 오온, 십이처, 교학의 발전</button>
-                    <button type="button" class="chapter-btn" data-chapter="03" role="tab" aria-selected="false" onclick="selectChapter('03')">03. 중관, 유식, 화엄의 사유</button>
-                    <button type="button" class="chapter-btn" data-chapter="04" role="tab" aria-selected="false" onclick="selectChapter('04')">04. 선불교와 현대적 실천</button>
-                </div>
-                <div class="chapter-group">
-                    <div class="chapter-group-label">참고 자료</div>
-                    <button type="button" class="chapter-btn" data-chapter="05" role="tab" aria-selected="false" onclick="selectChapter('05')">05. 용어 사전</button>
-                    <button type="button" class="chapter-btn" data-chapter="06" role="tab" aria-selected="false" onclick="selectChapter('06')">06. 경전 안내</button>
-                </div>
-            </div>
-
-            <!-- Reader Box -->
-            <div class="reader-container">
-                <div class="reader-content markdown-body" id="readerContent">
-                    <!-- Markdown content will render here -->
                 </div>
             </div>
         </section>
@@ -1441,8 +1404,8 @@
         <div class="container">오늘의 말씀과 불교 철학 공부</div>
     </footer>
 
-    <script src="quotes.js?v=20260611b"></script>
-    <script src="studyData.js?v=20260611b"></script>
+    <script src="quotes.js?v=20260611c"></script>
+    <script src="studyData.js?v=20260611c"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js" async></script>
     <script>
         function storageGet(key) {
@@ -2071,12 +2034,7 @@
         }
 
         function selectChapterFromSearch(id) {
-            selectChapter(id);
-            closeSearchModal();
-            
-            // Scroll to library section
-            const el = document.getElementById('materials');
-            if (el) el.scrollIntoView({ behavior: 'smooth' });
+            location.href = `library.html?chapter=${id}`;
         }
 
         // Initialize and check URL parameters on DOMContentLoaded
@@ -2084,14 +2042,7 @@
             const urlParams = new URLSearchParams(window.location.search);
             const chapterParam = urlParams.get('chapter');
             if (chapterParam && studyData[chapterParam]) {
-                selectChapter(chapterParam);
-                // Also scroll to materials section if parameter is present
-                setTimeout(() => {
-                    const el = document.getElementById('materials');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-            } else {
-                selectChapter('00');
+                location.replace(`library.html?chapter=${chapterParam}`);
             }
         });
     </script>
