@@ -38,6 +38,7 @@
                 linear-gradient(90deg, rgba(242, 239, 230, 0.014) 1px, transparent 1px),
                 linear-gradient(180deg, #171a14 0%, #11140f 44%, #0e100d 100%);
             background-size: 42px 42px, 42px 42px, auto;
+            background-color: var(--bg);
             color: var(--text);
             font-family: 'Noto Sans KR', sans-serif;
             line-height: 1.75;
@@ -371,18 +372,20 @@
 
             .nav-links {
                 width: 100%;
-                justify-content: flex-start;
-                overflow-x: auto;
-                padding-bottom: 2px;
-                scrollbar-width: none;
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 8px;
+                overflow: visible;
+                padding-bottom: 0;
             }
 
-            .nav-links::-webkit-scrollbar {
-                display: none;
-            }
-
-            .nav-links a {
-                white-space: nowrap;
+            .nav-links a,
+            .search-trigger-btn {
+                justify-content: center;
+                margin-left: 0;
+                min-width: 0;
+                text-align: center;
+                white-space: normal;
             }
 
             main {
@@ -612,6 +615,28 @@
             border-radius: 2px;
             padding: 0 2px;
         }
+
+        @media (max-width: 720px) {
+            .nav-links {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 8px;
+                overflow: visible;
+            }
+
+            .nav-links a,
+            .search-trigger-btn {
+                justify-content: center;
+                margin-left: 0;
+                min-width: 0;
+                text-align: center;
+                white-space: normal;
+            }
+
+            .search-trigger-btn {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -751,8 +776,8 @@
         <div class="container">견해를 세우되, 견해에 갇히지 않기</div>
     </footer>
 
-    <script src="quotes.js"></script>
-    <script src="studyData.js"></script>
+    <script src="quotes.js?v=20260611b"></script>
+    <script src="studyData.js?v=20260611b"></script>
     <script>
         const topics = [
             {
