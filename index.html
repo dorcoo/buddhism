@@ -1167,6 +1167,93 @@
             }, 1600);
         }
 
+        function normalizeQuoteText(text) {
+            return text
+                .replace(/<br\s*\/?>/gi, '\n')
+                .replace(/<\/?[^>]+>/g, '')
+                .replace(/&nbsp;/g, ' ')
+                .replace(/&amp;/g, '&')
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>')
+                .trim();
+        }
+
+        function splitLongToken(token, ctx, maxWidth) {
+            const chunks = [];
+            let chunk = '';
+
+            Array.from(token).forEach((char) => {
+                const test = chunk + char;
+                if (chunk && ctx.measureText(test).width > maxWidth) {
+                    chunks.push(chunk);
+                    chunk = char;
+                } else {
+                    chunk = test;
+                }
+            });
+
+            if (chunk) chunks.push(chunk);
+            return chunks;
+        }
+
+        function wrapCanvasLine(line, ctx, maxWidth) {
+            const words = line.trim().split(/\s+/).filter(Boolean);
+            if (words.length === 0) return [''];
+
+            const wrapped = [];
+            let current = '';
+
+            words.forEach((word) => {
+                if (ctx.measureText(word).width > maxWidth) {
+                    if (current) {
+                        wrapped.push(current);
+                        current = '';
+                    }
+                    wrapped.push(...splitLongToken(word, ctx, maxWidth));
+                    return;
+                }
+
+                const test = current ? `${current} ${word}` : word;
+                if (current && ctx.measureText(test).width > maxWidth) {
+                    wrapped.push(current);
+                    current = word;
+                } else {
+                    current = test;
+                }
+            });
+
+            if (current) wrapped.push(current);
+            return wrapped;
+        }
+
+        function wrapCanvasText(text, ctx, maxWidth) {
+            return normalizeQuoteText(text)
+                .split('\n')
+                .flatMap((line) => wrapCanvasLine(line, ctx, maxWidth));
+        }
+
+        function fitQuoteLines(quoteText, ctx, maxWidth, maxLines) {
+            const fontSizes = [34, 32, 30, 28, 26, 24, 22, 20];
+
+            for (const size of fontSizes) {
+                ctx.font = `normal ${size}px "Noto Serif KR", serif`;
+                const lines = wrapCanvasText(quoteText, ctx, maxWidth);
+                if (lines.length <= maxLines) {
+                    return { lines, fontSize: size, lineHeight: Math.round(size * 1.85) };
+                }
+            }
+
+            ctx.font = 'normal 20px "Noto Serif KR", serif';
+            const lines = wrapCanvasText(quoteText, ctx, maxWidth);
+            if (lines.length <= maxLines) {
+                return { lines, fontSize: 20, lineHeight: 37 };
+            }
+
+            const clippedLines = lines.slice(0, maxLines);
+            clippedLines[maxLines - 1] = `${clippedLines[maxLines - 1].replace(/[.…]+$/, '')}…`;
+            return { lines: clippedLines, fontSize: 20, lineHeight: 37 };
+        }
+
         function generateShareImage(quoteText, sourceText) {
             const canvas = document.createElement('canvas');
             canvas.width = 1080;
@@ -1241,28 +1328,28 @@
 
             // 5. Quote Text
             ctx.fillStyle = '#f2efe6';
-            ctx.font = 'normal 32px "Noto Serif KR", serif';
             ctx.textAlign = 'center';
 
-            const cleanText = quoteText.replace(/<br\s*\/?>/gi, '\n');
-            const lines = cleanText.split('\n');
-
-            let startY = 440;
-            const lineHeight = 66;
-            
-            // Adjust starting Y to keep it vertically centered if lines list varies
-            if (lines.length === 2) startY = 470;
-            else if (lines.length === 1) startY = 500;
+            const maxQuoteWidth = 780;
+            const quoteLayout = fitQuoteLines(quoteText, ctx, maxQuoteWidth, 8);
+            const lines = quoteLayout.lines;
+            const lineHeight = quoteLayout.lineHeight;
+            const quoteBlockHeight = Math.max(1, lines.length) * lineHeight;
+            const quoteCenterY = 535;
+            const startY = quoteCenterY - (quoteBlockHeight / 2) + (lineHeight / 2);
 
             lines.forEach((line, index) => {
                 ctx.fillText(line.trim(), 540, startY + (index * lineHeight));
             });
 
             // 6. Author/Source
-            const sourceY = startY + (lines.length * lineHeight) + 64;
+            const sourceY = Math.min(startY + (lines.length * lineHeight) + 64, 840);
             ctx.fillStyle = '#d7c899';
             ctx.font = '500 24px "Noto Serif KR", serif';
-            ctx.fillText(sourceText, 540, sourceY);
+            const sourceLines = wrapCanvasLine(sourceText, ctx, 720);
+            sourceLines.slice(0, 2).forEach((line, index) => {
+                ctx.fillText(line.trim(), 540, sourceY + (index * 34));
+            });
 
             // 7. Footer
             ctx.fillStyle = '#8e9688';
