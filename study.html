@@ -137,8 +137,30 @@
         }
 
         .hero {
-            max-width: 820px;
+            display: grid;
+            grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1fr);
+            gap: clamp(20px, 4vw, 38px);
+            align-items: center;
             margin-bottom: 34px;
+        }
+
+        .hero-copy {
+            max-width: 820px;
+        }
+
+        .hero-visual {
+            border: 1px solid rgba(218, 205, 171, 0.16);
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(8, 10, 7, 0.32);
+            aspect-ratio: 4 / 3;
+        }
+
+        .hero-visual img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .eyebrow {
@@ -708,12 +730,17 @@
         }
 
         @media (max-width: 820px) {
+            .hero,
             .toc,
             .grid,
             .chapter-nav,
             .skandha-map,
             .skandha-columns {
                 grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                order: -1;
             }
 
             .stage-head {
@@ -1088,9 +1115,14 @@
 
     <main class="container">
         <section class="hero">
-            <span class="eyebrow">Buddhist Study Path</span>
-            <h1>불교 철학을 깨달음으로 옮기는 공부</h1>
-            <p>불교 공부는 지식을 모으는 일이면서 동시에 집착, 분노, 불안이 일어나는 방식을 직접 관찰하는 일입니다. 아래 네 단계는 이해, 통찰, 수행, 일상화를 차례로 연결합니다.</p>
+            <div class="hero-copy">
+                <span class="eyebrow">Buddhist Study Path</span>
+                <h1>불교 철학을 깨달음으로 옮기는 공부</h1>
+                <p>불교 공부는 지식을 모으는 일이면서 동시에 집착, 분노, 불안이 일어나는 방식을 직접 관찰하는 일입니다. 아래 네 단계는 이해, 통찰, 수행, 일상화를 차례로 연결합니다.</p>
+            </div>
+            <figure class="hero-visual">
+                <img src="assets/study-hero.png" alt="불교 공부의 흐름을 상징하는 책과 연꽃, 수행 도식 이미지" loading="eager">
+            </figure>
         </section>
 
         <nav class="toc" aria-label="단계 목차">
