@@ -123,13 +123,26 @@
         }
 
         main {
-            padding: 70px 0 84px;
+            padding: 42px 0 84px;
         }
 
         .hero {
-            max-width: 780px;
-            margin: 0 auto 42px;
-            text-align: center;
+            min-height: min(560px, calc(100vh - 94px));
+            display: grid;
+            align-items: center;
+            margin-bottom: 42px;
+            border: 1px solid rgba(218, 205, 171, 0.16);
+            border-radius: 8px;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg, rgba(17, 20, 15, 0.92) 0%, rgba(17, 20, 15, 0.72) 42%, rgba(17, 20, 15, 0.16) 78%),
+                url('assets/buddha-hero.png') center / cover no-repeat;
+            box-shadow: var(--shadow);
+            padding: clamp(28px, 5vw, 58px);
+        }
+
+        .hero-copy {
+            max-width: 600px;
         }
 
         .eyebrow {
@@ -156,6 +169,8 @@
         .hero p {
             color: var(--sub);
             font-size: 1.04rem;
+            word-break: keep-all;
+            overflow-wrap: break-word;
         }
 
         .quote-panel {
@@ -472,12 +487,21 @@
             }
 
             main {
-                padding-top: 48px;
+                padding-top: 22px;
             }
 
             .hero,
             .quote-content {
                 text-align: left;
+            }
+
+            .hero {
+                min-height: 520px;
+                align-items: end;
+                background:
+                    linear-gradient(180deg, rgba(17, 20, 15, 0.12) 0%, rgba(17, 20, 15, 0.42) 46%, rgba(17, 20, 15, 0.94) 100%),
+                    url('assets/buddha-hero.png') 62% center / cover no-repeat;
+                padding: 24px;
             }
 
             .quote-panel::before {
@@ -868,9 +892,11 @@
 
     <main>
         <section class="container hero">
-            <span class="eyebrow">Daily Quote</span>
-            <h1>오늘 마음에 둘 한 문장</h1>
-            <p>말씀은 답을 빨리 찾기 위한 문제가 아니라, 하루 동안 마음이 어디에 걸리는지 조용히 비춰 보는 거울입니다.</p>
+            <div class="hero-copy">
+                <span class="eyebrow">Daily Quote</span>
+                <h1>오늘 마음에 둘 한 문장</h1>
+                <p>말씀은 답을 빨리 찾기 위한 문제가 아니라, 하루 동안 마음이 어디에 걸리는지 조용히 비춰 보는 거울입니다.</p>
+            </div>
         </section>
 
         <section class="container" aria-labelledby="hwadu-title">
